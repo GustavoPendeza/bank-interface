@@ -1,0 +1,25 @@
+{
+    "goals": [
+        {
+            "name": "Holidays",
+            "money": 2500,
+            "goal": 5000,
+            "color": "#3d4b58",
+            "progressColor": "#97baee"
+        },
+        {
+            "name": "Concert",
+            "money": 600,
+            "goal": 800,
+            "color": "#49463c",
+            "progressColor": "#f4cfaa"
+        },
+        {
+            "name": "Marriage",
+            "money": 4500,
+            "goal": 10000,
+            "color": "#424357",
+            "progressColor": "#c5a6f1"
+        }
+    ]
+}

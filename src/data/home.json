@@ -1,0 +1,57 @@
+{
+    "id": 123456,
+    "user": "Gustavo Pendeza",
+    "balance": 16027,
+    "services": [
+        {
+            "name": "Transfer",
+            "icon": "account-balance",
+            "color": "#7dd3fc",
+            "route": "transfer"
+        },
+        {
+            "name": "Savings",
+            "icon": "monetization-on",
+            "color": "#facc15",
+            "route": "savings"
+        },
+        {
+            "name": "Pay bills",
+            "icon": "receipt-long",
+            "color": "#a78bfa",
+            "route": "pay-bills"
+        },
+        {
+            "name": "Withdraw",
+            "icon": "payments",
+            "color": "#86efac",
+            "route": "withdraw"
+        }
+    ],
+    "transactions": [
+        {
+            "icon": "lightbulb-outline",
+            "color": "#facc15",
+            "name": "Electrecity payment",
+            "date": "19:01, 02/10/2021",
+            "cost": true,
+            "money": 520
+        },
+        {
+            "icon": "credit-card",
+            "color": "#7dd3fc",
+            "name": "Top up wallet",
+            "date": "19:01, 02/10/2021",
+            "cost": false,
+            "money": 126
+        },
+        {
+            "icon": "local-mall",
+            "color": "#a78bfa",
+            "name": "Pay for Apple",
+            "date": "19:01, 02/10/2021",
+            "cost": true,
+            "money": 36
+        }
+    ]
+}
