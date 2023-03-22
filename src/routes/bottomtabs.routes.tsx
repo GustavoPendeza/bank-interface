@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { History } from '../screens/History';
 import { Home } from '../screens/Home';
-import { Investments } from '../screens/Investments';
-import { Shop } from '../screens/Shop';
+import { Deals } from '../screens/Deals';
+import { Wallet } from '../screens/Wallet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { View } from 'react-native';
@@ -44,8 +44,8 @@ export function BottomTabsRoutes() {
                 }}
             />
             <Screen
-                name='investments'
-                component={Investments}
+                name='deals'
+                component={Deals}
                 options={{
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused }) => (
@@ -70,8 +70,8 @@ export function BottomTabsRoutes() {
                 }}
             />
             <Screen
-                name='shop'
-                component={Shop}
+                name='wallet'
+                component={Wallet}
                 options={{
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused }) => (
