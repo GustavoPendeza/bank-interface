@@ -19,11 +19,7 @@ export function ProgressBar({ money, goal }: Props) {
     })
 
     useEffect(() => {
-        var value = sharedValue.value
-        sharedValue.value = 0
-        sharedValue.value = withTiming(value, {
-            duration: 1000
-        })
+        sharedValue.value = withTiming(generateProgressPercentage(money, goal))
     }, [money, goal])
 
     return (
