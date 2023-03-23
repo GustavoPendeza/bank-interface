@@ -4,6 +4,7 @@ import { ProgressBar } from "../components/ProgressBar";
 import { SavingsCard } from "../components/SavingsCard";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FormatNumber } from "../utils/format-number";
+import { useNavigation } from "@react-navigation/native";
 
 interface Goal {
     name: string;
@@ -19,6 +20,7 @@ interface Data {
 
 export function Savings() {
     const data: Data = require('../data/savings.json');
+    const { navigate } = useNavigation();
     const plusGoal = true;
     let totalMoney = 0;
     let totalGoal = 0;
@@ -29,6 +31,7 @@ export function Savings() {
                 <TouchableOpacity
                     activeOpacity={0.7}
                     className='h-40 w-40 items-center justify-center'
+                    onPress={() => navigate('createGoal')}
                 >
                     <Ionicons name="add-circle" size={48} color='#facad0' />
                     <Text className="text-[#facad0] text-lg mt-1">Add new goal</Text>
@@ -46,7 +49,7 @@ export function Savings() {
                 <Text className="text-white text-xl">Savings online</Text>
             </View>
 
-            <Text className="mt-7 mx-5 text-zinc-500 text-base">
+            <Text className="mt-7 mx-7 text-zinc-500 text-base">
                 Your savings
             </Text>
 

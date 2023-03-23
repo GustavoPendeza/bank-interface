@@ -1,0 +1,20 @@
+{
+    "colors": [
+        {
+            "color": "#3d4b58",
+            "progressColor": "#97baee"
+        },
+        {
+            "color": "#49463c",
+            "progressColor": "#f4cfaa"
+        },
+        {
+            "color": "#424357",
+            "progressColor": "#c5a6f1"
+        },
+        {
+            "color": "#44533f",
+            "progressColor": "#00a000"
+        }
+    ]
+}

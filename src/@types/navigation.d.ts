@@ -6,6 +6,7 @@ export declare global {
             savings: {
                 item: Object;
             },
+            createGoal: undefined,
         }
     }
 }
