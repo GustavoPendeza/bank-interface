@@ -4,7 +4,12 @@ import { ProgressBar } from "../components/ProgressBar";
 import { SavingsCard } from "../components/SavingsCard";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FormatNumber } from "../utils/format-number";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+
+interface Params {
+    newData: Goal | null;
+}
 
 interface Goal {
     name: string;
@@ -20,7 +25,10 @@ interface Data {
 
 export function Savings() {
     const data: Data = require('../data/savings.json');
+    const route = useRoute();
+    let { newData } = route.params as Params;
     const { navigate } = useNavigation();
+    const [refresh, setRefresh] = useState(false);
     const plusGoal = true;
     let totalMoney = 0;
     let totalGoal = 0;
@@ -40,6 +48,19 @@ export function Savings() {
         }
         return <SavingsCard item={item} />
     }
+
+    useEffect(() => {
+        if (newData) {
+            data.goals.push(newData)
+            newData = null
+        }
+
+        setRefresh(true)
+    }, [newData])
+
+    useEffect(() => {
+        setRefresh(false)
+    }, [refresh])
 
     return (
         <View className="flex-1 bg-background">
@@ -63,12 +84,12 @@ export function Savings() {
                     }
                 </>
 
-                <Text className="text-white text-5xl">${FormatNumber(totalGoal)}</Text>
+                <Text className="text-white text-5xl" numberOfLines={1}>${FormatNumber(totalGoal)}</Text>
 
                 <ProgressBar money={totalMoney} goal={totalGoal} />
 
                 <Text className="text-zinc-500 text-sm">
-                    ${FormatNumber(totalMoney)} / 
+                    ${FormatNumber(totalMoney)} /
                     ${FormatNumber(totalGoal)}
                 </Text>
             </View>

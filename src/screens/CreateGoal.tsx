@@ -1,29 +1,103 @@
-import { useState } from "react";
-import { FlatList, ListRenderItemInfo, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { Alert, FlatList, ListRenderItemInfo, Text, TextInput, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import colors from "tailwindcss/colors";
 import { BackButton } from "../components/BackButton";
 import { ColorSelect } from "../components/ColorSelect";
+import { FormatNumber } from "../utils/format-number";
+
+interface Goal {
+    name: string;
+    money: number;
+    goal: number;
+    color: string;
+    progressColor: string;
+}
 
 interface Color {
     color: string;
     progressColor: string;
 }
 
-interface Data {
+interface HomeData {
+    balance: number;
+}
+
+interface ColorData {
     colors: Color[];
 }
 
 export function CreateGoal() {
-    const data: Data = require('../data/colors.json');
+    const homeData: HomeData = require('../data/home.json');
+    const colorData: ColorData = require('../data/colors.json');
+    const { navigate } = useNavigation();
+    const [newData, setNewData] = useState<Goal | null>(null)
     const [name, setName] = useState('');
-    const [balance, setBalance] = useState('');
-    const [goal, setGoal] = useState('');
+    const [money, setMoney] = useState(0);
+    const [goal, setGoal] = useState(0);
+    const [color, setColor] = useState('');
+    const [progressColor, setProgressColor] = useState('');
 
     function renderItem({ item }: ListRenderItemInfo<Color>) {
-        return <ColorSelect color={item.color} progressColor={item.progressColor} />
+        return (
+            <ColorSelect
+                color={item.color}
+                selectedColor={color}
+                setColor={setColor}
+                progressColor={item.progressColor}
+                setProgressColor={setProgressColor}
+            />
+        )
     }
+
+    function HandleConfirm() {
+        try {
+            if (!money || !goal) {
+                Alert.alert('Sorry', 'Make sure you entered the data correctly. Do not use commas or spaces in cash amounts.')
+                return;
+            } else {
+                if (money >= goal) {
+                    Alert.alert('Sorry', 'The balance cannot be greater than the goal.')
+                    return;
+                } else {
+                    if (money > homeData.balance) {
+                        Alert.alert('Sorry', `Your current balance is $${FormatNumber(homeData.balance)}. You cannot add more money than your current balance.`)
+                        return;
+                    } else {
+                        if (name !== '' && color !== '' && progressColor !== '') {
+                            setNewData({
+                                "name": name,
+                                "money": money,
+                                "goal": goal,
+                                "color": color,
+                                "progressColor": progressColor
+                            })
+                        } else {
+                            Alert.alert('Sorry', 'Fill in the fields correctly.')
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            Alert.alert('Sorry', 'There was an error registering this goal. Please try again.')
+        }
+    }
+
+    useEffect(() => {
+        if (newData) {
+            return Alert.alert('Teste', 'Teste', [
+                {
+                    text: "Yes",
+                    onPress: () => { navigate('savings', { newData: newData }) }
+                },
+                {
+                    text: "No"
+                }
+            ])
+        }
+    }, [newData])
 
     return (
         <View className="flex-1 bg-background">
@@ -38,8 +112,8 @@ export function CreateGoal() {
                     className="flex-1 text-white"
                     placeholder="Goal name"
                     placeholderTextColor={colors.zinc[400]}
-                    onChangeText={setName}
-                    value={name}
+                    onChange={(event) => setName(event.nativeEvent.text.trim())}
+                    maxLength={20}
                     clearButtonMode="always"
                 />
             </View>
@@ -52,8 +126,7 @@ export function CreateGoal() {
                     placeholder="Opening balance"
                     placeholderTextColor={colors.zinc[400]}
                     keyboardType="number-pad"
-                    onChangeText={setBalance}
-                    value={balance}
+                    onChange={(event) => setMoney(Number(Number(event.nativeEvent.text).toFixed(0)))}
                     clearButtonMode="always"
                 />
             </View>
@@ -66,16 +139,19 @@ export function CreateGoal() {
                     placeholder="Your goal"
                     placeholderTextColor={colors.zinc[400]}
                     keyboardType="number-pad"
-                    onChangeText={setGoal}
-                    value={goal}
+                    onChange={(event) => setGoal(Number(Number(event.nativeEvent.text).toFixed(0)))}
                     clearButtonMode="always"
                 />
             </View>
 
+            <View className="mx-8 mt-7">
+                <Text className="text-white text-base font-semibold">Choose a color</Text>
+            </View>
+
             <FlatList
-                className="mx-7 mt-10"
+                className="mx-7 mt-8"
                 keyExtractor={(item, index) => item.color + index}
-                data={data.colors}
+                data={colorData.colors}
                 renderItem={renderItem}
                 numColumns={4}
                 columnWrapperStyle={{ justifyContent: "space-evenly" }}
@@ -89,7 +165,7 @@ export function CreateGoal() {
 
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => { }}
+                onPress={HandleConfirm}
                 className="absolute bottom-0 w-full"
             >
                 <LinearGradient
@@ -98,7 +174,7 @@ export function CreateGoal() {
                     colors={['#303551', '#342d46']}
                     className="mt-8 mx-7 h-12 px-5 items-center justify-center rounded-2xl"
                 >
-                    <Text className="text-[#facad0] text-base font-semibold">Confirm</Text>
+                    <Text className="text-[#facad0] text-base font-semibold">Create new goal</Text>
                 </LinearGradient>
             </TouchableOpacity>
 

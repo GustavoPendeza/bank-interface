@@ -4,7 +4,7 @@ export declare global {
             index: undefined,
             transfer: undefined,
             savings: {
-                item: Object;
+                newData: Object | null
             },
             createGoal: undefined,
         }

@@ -6,7 +6,7 @@ interface Service {
     name: string;
     icon: string;
     color: string;
-    route:any;
+    route: any;
 }
 
 interface Props {
@@ -16,8 +16,16 @@ interface Props {
 export function Services({ item }: Props) {
     const { navigate } = useNavigation();
 
+    function Navigate() {
+        if (item.route === 'savings') {
+            navigate(item.route, { newData: null})
+        } else {
+            navigate(item.route)
+        }
+    }
+
     return (
-        <TouchableOpacity activeOpacity={0.7} onPress={() => navigate(item.route)}>
+        <TouchableOpacity activeOpacity={0.7} onPress={Navigate}>
             <View className="h-24 w-20 mx-2.5 items-center justify-between">
                 <View className="bg-zinc-600 h-16 w-16 rounded-full items-center justify-center">
                     <MaterialIcons name={item.icon} size={24} color={item.color} />

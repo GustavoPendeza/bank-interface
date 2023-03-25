@@ -15,6 +15,22 @@
         {
             "color": "#44533f",
             "progressColor": "#00a000"
+        },
+        {
+            "color": "#74323d",
+            "progressColor": "#e61919"
+        },
+        {
+            "color": "#6e5454",
+            "progressColor": "#e0b5b5"
+        },
+        {
+            "color": "#353839",
+            "progressColor": "#000000"
+        },
+        {
+            "color": "#775640",
+            "progressColor": "#e1770d"
         }
     ]
 }
