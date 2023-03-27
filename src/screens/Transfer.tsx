@@ -1,17 +1,14 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { BackButton } from "../components/BackButton";
 import LinearGradient from "react-native-linear-gradient";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import colors from "tailwindcss/colors";
+import { TitleScreen } from "../components/TItleScreen";
 
 export function Transfer() {
     return (
         <View className="flex-1 bg-background">
 
-            <View className="flex-row mt-12 px-5 items-center justify-center">
-                <BackButton />
-                <Text className="text-white text-xl">Transfer to Monaca</Text>
-            </View>
+            <TitleScreen title="Transfer to Monaca" />
 
             <LinearGradient
                 start={{ x: 0, y: 0 }}

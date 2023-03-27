@@ -19,7 +19,7 @@
             "name": "Pay bills",
             "icon": "receipt-long",
             "color": "#a78bfa",
-            "route": "pay-bills"
+            "route": "paybillsmenu"
         },
         {
             "name": "Withdraw",

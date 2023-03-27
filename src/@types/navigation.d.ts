@@ -7,6 +7,8 @@ export declare global {
                 newData: Object | null
             },
             createGoal: undefined,
+            paybillsmenu: undefined,
+            paybill: undefined,
         }
     }
 }
