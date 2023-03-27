@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { Alert, FlatList, ListRenderItemInfo, Text, TextInput, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import colors from "tailwindcss/colors";
-import { BackButton } from "../components/BackButton";
 import { ColorSelect } from "../components/ColorSelect";
+import { TitleScreen } from "../components/TItleScreen";
 import { FormatNumber } from "../utils/format-number";
 
 interface Goal {
@@ -87,92 +88,98 @@ export function CreateGoal() {
 
     useEffect(() => {
         if (newData) {
-            return Alert.alert('Teste', 'Teste', [
-                {
-                    text: "Yes",
-                    onPress: () => { navigate('savings', { newData: newData }) }
-                },
-                {
-                    text: "No"
-                }
-            ])
+            return Alert.alert(
+                'Are you sure you want to create this goal?',
+                `Name: \"${name}\" \nOpening balance: $${FormatNumber(money)} \nGoal: $${FormatNumber(goal)}`,
+                [
+                    {
+                        text: "No"
+                    },
+                    {
+                        text: "Yes",
+                        onPress: () => { navigate('savings', { newData: newData }) }
+                    }
+                ],
+                { cancelable: true }
+            )
         }
     }, [newData])
 
     return (
         <View className="flex-1 bg-background">
 
-            <View className="flex-row mt-12 px-5 items-center justify-center">
-                <BackButton />
-                <Text className="text-white text-xl">New goal</Text>
-            </View>
+            <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
 
-            <View className="flex-row items-center h-14 mt-10 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
-                <TextInput
-                    className="flex-1 text-white"
-                    placeholder="Goal name"
-                    placeholderTextColor={colors.zinc[400]}
-                    onChange={(event) => setName(event.nativeEvent.text.trim())}
-                    maxLength={20}
-                    clearButtonMode="always"
+                <TitleScreen title="New goal" />
+
+                <View className="justify-center h-14 mt-10 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
+                    <TextInput
+                        className="flex-1 text-white"
+                        placeholder="Goal name"
+                        placeholderTextColor={colors.zinc[400]}
+                        onChange={(event) => setName(event.nativeEvent.text.trim())}
+                        maxLength={20}
+                        clearButtonMode="always"
+                    />
+                </View>
+
+                <View className="flex-row items-center h-14 mt-8 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
+                    <MaterialIcons name="attach-money" size={20} color={colors.zinc[400]} />
+
+                    <TextInput
+                        className="flex-1 text-white"
+                        placeholder="Opening balance"
+                        placeholderTextColor={colors.zinc[400]}
+                        keyboardType="number-pad"
+                        onChange={(event) => setMoney(Number(Number(event.nativeEvent.text).toFixed(0)))}
+                        clearButtonMode="always"
+                    />
+                </View>
+
+                <View className="flex-row items-center h-14 mt-8 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
+                    <MaterialIcons name="attach-money" size={20} color={colors.zinc[400]} />
+
+                    <TextInput
+                        className="flex-1 text-white"
+                        placeholder="Your goal"
+                        placeholderTextColor={colors.zinc[400]}
+                        keyboardType="number-pad"
+                        onChange={(event) => setGoal(Number(Number(event.nativeEvent.text).toFixed(0)))}
+                        clearButtonMode="always"
+                    />
+                </View>
+
+                <View className="mx-8 mt-7">
+                    <Text className="text-white text-base font-semibold">Choose a color</Text>
+                </View>
+
+                <FlatList
+                    className="mx-7 mt-8 mb-5"
+                    keyExtractor={(item, index) => item.color + index}
+                    data={colorData.colors}
+                    renderItem={renderItem}
+                    numColumns={4}
+                    columnWrapperStyle={{ justifyContent: "space-evenly" }}
+                    scrollEnabled={false}
+                    ItemSeparatorComponent={() => {
+                        return (
+                            <View className="h-7"></View>
+                        )
+                    }}
                 />
-            </View>
 
-            <View className="flex-row items-center h-14 mt-8 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
-                <MaterialIcons name="attach-money" size={20} color={colors.zinc[400]} />
-
-                <TextInput
-                    className="flex-1 text-white"
-                    placeholder="Opening balance"
-                    placeholderTextColor={colors.zinc[400]}
-                    keyboardType="number-pad"
-                    onChange={(event) => setMoney(Number(Number(event.nativeEvent.text).toFixed(0)))}
-                    clearButtonMode="always"
-                />
-            </View>
-
-            <View className="flex-row items-center h-14 mt-8 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
-                <MaterialIcons name="attach-money" size={20} color={colors.zinc[400]} />
-
-                <TextInput
-                    className="flex-1 text-white"
-                    placeholder="Your goal"
-                    placeholderTextColor={colors.zinc[400]}
-                    keyboardType="number-pad"
-                    onChange={(event) => setGoal(Number(Number(event.nativeEvent.text).toFixed(0)))}
-                    clearButtonMode="always"
-                />
-            </View>
-
-            <View className="mx-8 mt-7">
-                <Text className="text-white text-base font-semibold">Choose a color</Text>
-            </View>
-
-            <FlatList
-                className="mx-7 mt-8"
-                keyExtractor={(item, index) => item.color + index}
-                data={colorData.colors}
-                renderItem={renderItem}
-                numColumns={4}
-                columnWrapperStyle={{ justifyContent: "space-evenly" }}
-                scrollEnabled={false}
-                ItemSeparatorComponent={() => {
-                    return (
-                        <View className="h-7"></View>
-                    )
-                }}
-            />
+            </ScrollView>
 
             <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={HandleConfirm}
-                className="absolute bottom-0 w-full"
+                className="bottom-0 w-full"
             >
                 <LinearGradient
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
                     colors={['#303551', '#342d46']}
-                    className="mt-8 mx-7 h-12 px-5 items-center justify-center rounded-2xl"
+                    className="mx-7 h-12 px-5 items-center justify-center rounded-2xl"
                 >
                     <Text className="text-[#facad0] text-base font-semibold">Create new goal</Text>
                 </LinearGradient>

@@ -1,11 +1,11 @@
 import { FlatList, ListRenderItemInfo, Text, TouchableOpacity, View } from "react-native";
-import { BackButton } from "../components/BackButton";
 import { ProgressBar } from "../components/ProgressBar";
 import { SavingsCard } from "../components/SavingsCard";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FormatNumber } from "../utils/format-number";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
+import { TitleScreen } from "../components/TItleScreen";
 
 interface Params {
     newData: Goal | null;
@@ -65,10 +65,7 @@ export function Savings() {
     return (
         <View className="flex-1 bg-background">
 
-            <View className="flex-row mt-12 px-5 items-center justify-center">
-                <BackButton />
-                <Text className="text-white text-xl">Savings online</Text>
-            </View>
+            <TitleScreen title="Savings online" />
 
             <Text className="mt-7 mx-7 text-zinc-500 text-base">
                 Your savings
