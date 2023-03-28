@@ -12,6 +12,7 @@ Projeto de estudo sobre bank interface. Baseado no design de <a href="https://dr
 - <a href="https://docs.swmansion.com/react-native-reanimated/">React Native Reanimated</a>
 - <a href="https://github.com/software-mansion/react-native-svg">React Native SVG</a>
 - <a href="https://github.com/nithinpp69/react-native-circular-progress-indicator">React Native Circular Progress Indicator</a>
+- <a href="https://github.com/CaioQuirinoMedeiros/react-native-mask-input">React Native Mask Input</a>
 - <a href="https://github.com/react-native-linear-gradient/react-native-linear-gradient">React Native Linear Gradient</a>
 - <a href="https://github.com/kadiraydinli/react-native-system-navigation-bar">React Native System Navigation Bar</a>
 

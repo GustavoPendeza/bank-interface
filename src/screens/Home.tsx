@@ -1,3 +1,5 @@
+import { useRoute } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import { FlatList, ListRenderItemInfo } from "react-native";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -11,7 +13,7 @@ interface Service {
     name: string;
     icon: string;
     color: string;
-    route:any;
+    route: any;
 }
 
 interface Transaction {
@@ -31,16 +33,38 @@ interface Data {
     transactions: Transaction[];
 }
 
+interface Params {
+    total: number;
+}
+
 export function Home() {
     const data: Data = require('../data/home.json');
+    const route = useRoute();
+    const [refresh, setRefresh] = useState(false);
 
     function renderService({ item }: ListRenderItemInfo<Service>) {
-        return <Services item={item} />
+        return <Services item={item} balance={data.balance} />
     }
 
     function renderTransaction({ item }: ListRenderItemInfo<Transaction>) {
         return <Transactions item={item} />
     }
+
+    useEffect(() => {
+        if (route.params) {
+            let { total } = route.params as Params;
+
+            data.balance = data.balance - total;
+
+            total = 0
+
+            setRefresh(true)
+        }
+    }, [route.params])
+
+    useEffect(() => {
+        setRefresh(false)
+    }, [refresh])
 
     return (
         <View className="flex-1 bg-background">

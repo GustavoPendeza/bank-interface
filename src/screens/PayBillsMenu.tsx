@@ -1,21 +1,31 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Text, TouchableOpacity, View } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import colors from "tailwindcss/colors";
 import { TitleScreen } from "../components/TItleScreen";
 
+interface Params {
+    balance: number;
+}
+
 export function PayBillsMenu() {
     const { navigate } = useNavigation();
-    
+    const route = useRoute();
+    let { balance } = route.params as Params;
+
     return (
         <View className="flex-1 bg-background">
 
             <TitleScreen title="Pay bills online" />
 
-            <View className="mt-14">
+            <Text className="mt-7 mx-7 text-zinc-500 text-base">
+                Payment options
+            </Text>
+
+            <View className="mt-5">
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => navigate('paybill')}
+                    onPress={() => navigate('paybill', { balance: balance })}
                 >
                     <View className="flex-row items-center justify-between h-24 mx-5">
                         <View className="flex-row items-center">
