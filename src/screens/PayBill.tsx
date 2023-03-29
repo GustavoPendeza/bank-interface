@@ -11,11 +11,12 @@ import { FormatNumber } from "../utils/format-number";
 
 interface Params {
     balance: number;
+    invoice: number;
 }
 
 export function PayBill() {
     const route = useRoute();
-    let { balance } = route.params as Params;
+    let { balance, invoice } = route.params as Params;
     const [barcode, setBarcode] = useState('');
     const [characters, setCharacters] = useState(0);
     const [receiver, setReceiver] = useState('');
@@ -34,7 +35,7 @@ export function PayBill() {
                 Alert.alert('Sorry', 'You don\'t have enough balance for this.')
             } else {
                 setVisibleBalanceModal(true)
-            }        
+            }
         } else {
             Alert.alert('Sorry', 'There is no bill to pay. Please enter the bar code correctly.')
         }
@@ -42,7 +43,7 @@ export function PayBill() {
 
     function HandleOpenCreditCardModal() {
         if (total) {
-            if (credit === limit || credit + total < limit) {
+            if (credit === limit || credit + total > limit) {
                 Alert.alert('Sorry', 'You\'ve used up all your credit or you\'re about to go over it.')
             } else {
                 setVisibleCardModal(true)
@@ -71,6 +72,10 @@ export function PayBill() {
             setTotal(0)
         }
     }, [characters])
+
+    useEffect(() => {
+        setCredit(invoice);
+    }, [invoice])
 
     return (
         <View className="flex-1 bg-background">
@@ -147,7 +152,7 @@ export function PayBill() {
                         <View className="flex-row items-center justify-between">
                             <Text className="text-zinc-500 text-sm">Amount</Text>
 
-                            <Text className="text-zinc-500 text-sm">${amount}</Text>
+                            <Text className="text-zinc-500 text-sm">${FormatNumber(amount)}</Text>
                         </View>
 
                         <View className="flex-row items-center justify-between">
@@ -172,7 +177,7 @@ export function PayBill() {
                         <View className="flex-row items-center justify-between">
                             <Text className="text-zinc-400 text-base font-semibold">Total</Text>
 
-                            <Text className="text-zinc-400 text-lg font-bold">${total}</Text>
+                            <Text className="text-zinc-400 text-lg font-bold">${FormatNumber(total)}</Text>
                         </View>
                     </View>
 
@@ -249,10 +254,11 @@ export function PayBill() {
                 <ModalPayWithBalance
                     handleClose={() => setVisibleBalanceModal(false)}
                     balance={balance}
+                    credit={credit}
                     total={total}
                 />
             </Modal>
-            
+
             <Modal
                 visible={visibleCardModal}
                 transparent={true}
@@ -273,11 +279,11 @@ export function PayBill() {
 interface Props {
     handleClose: any;
     balance?: number;
-    credit?: number;
+    credit: number;
     total: number;
 }
 
-export function ModalPayWithBalance({ handleClose, balance = 0, total }: Props) {
+export function ModalPayWithBalance({ handleClose, balance = 0, credit, total }: Props) {
     const { navigate } = useNavigation();
 
     return (
@@ -323,7 +329,7 @@ export function ModalPayWithBalance({ handleClose, balance = 0, total }: Props) 
 
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigate('home', { total: total })}
+                        onPress={() => navigate('home', { total: total, credit: credit })}
                     >
                         <LinearGradient
                             start={{ x: 0, y: 0 }}
@@ -351,7 +357,7 @@ export function ModalPayWithBalance({ handleClose, balance = 0, total }: Props) 
     )
 }
 
-export function ModalPayWithCreditCard({ handleClose, credit = 0, total }: Props) {
+export function ModalPayWithCreditCard({ handleClose, credit, total }: Props) {
     const { navigate } = useNavigation();
 
     return (
@@ -397,7 +403,7 @@ export function ModalPayWithCreditCard({ handleClose, credit = 0, total }: Props
 
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigate('home', { total: 0 })}
+                        onPress={() => navigate('home', { total: 0, credit: credit + total })}
                     >
                         <LinearGradient
                             start={{ x: 0, y: 0 }}

@@ -6,12 +6,13 @@ import { TitleScreen } from "../components/TItleScreen";
 
 interface Params {
     balance: number;
+    invoice: number;
 }
 
 export function PayBillsMenu() {
     const { navigate } = useNavigation();
     const route = useRoute();
-    let { balance } = route.params as Params;
+    let { balance, invoice } = route.params as Params;
 
     return (
         <View className="flex-1 bg-background">
@@ -25,7 +26,7 @@ export function PayBillsMenu() {
             <View className="mt-5">
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => navigate('paybill', { balance: balance })}
+                    onPress={() => navigate('paybill', { balance: balance, invoice: invoice })}
                 >
                     <View className="flex-row items-center justify-between h-24 mx-5">
                         <View className="flex-row items-center">
@@ -48,7 +49,7 @@ export function PayBillsMenu() {
 
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => { }}
+                    onPress={() => navigate('paycreditcard', { balance: balance, invoice: invoice })}
                 >
                     <View className="flex-row items-center justify-between h-24 mx-5">
                         <View className="flex-row items-center">
