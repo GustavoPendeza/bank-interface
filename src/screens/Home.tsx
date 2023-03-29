@@ -35,15 +35,17 @@ interface Data {
 
 interface Params {
     total: number;
+    credit: number;
 }
 
 export function Home() {
     const data: Data = require('../data/home.json');
     const route = useRoute();
     const [refresh, setRefresh] = useState(false);
+    const [invoice, setInvoice] = useState(0);
 
     function renderService({ item }: ListRenderItemInfo<Service>) {
-        return <Services item={item} balance={data.balance} />
+        return <Services item={item} balance={data.balance} invoice={invoice} />
     }
 
     function renderTransaction({ item }: ListRenderItemInfo<Transaction>) {
@@ -52,13 +54,16 @@ export function Home() {
 
     useEffect(() => {
         if (route.params) {
-            let { total } = route.params as Params;
+            let { total, credit } = route.params as Params;
 
             data.balance = data.balance - total;
 
-            total = 0
+            setInvoice(credit);
 
-            setRefresh(true)
+            total = 0;
+            credit = 0;
+
+            setRefresh(true);
         }
     }, [route.params])
 

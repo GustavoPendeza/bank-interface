@@ -11,16 +11,19 @@ interface Service {
 
 interface Props {
     item: Service;
-    balance:number;
+    balance: number;
+    invoice: number;
 }
 
-export function Services({ item, balance }: Props) {
+export function Services({ item, balance, invoice }: Props) {
     const { navigate } = useNavigation();
 
     function Navigate() {
         if (item.route === 'savings') {
             navigate(item.route, { newData: null })
-        }else if (item.route === 'paybillsmenu') {
+        } else if (item.route === 'paybillsmenu') {
+            navigate(item.route, { balance: balance, invoice: invoice })
+        } else if (item.route === 'withdraw') {
             navigate(item.route, { balance: balance })
         } else {
             navigate(item.route)
