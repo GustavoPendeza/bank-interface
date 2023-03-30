@@ -35,7 +35,7 @@ interface Data {
 
 interface Params {
     total: number;
-    credit: number;
+    credit: number | null;
 }
 
 export function Home() {
@@ -58,8 +58,10 @@ export function Home() {
 
             data.balance = data.balance - total;
 
-            setInvoice(credit);
-
+            if (credit !== null) {
+                setInvoice(credit);
+            }
+            
             total = 0;
             credit = 0;
 

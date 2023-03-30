@@ -24,7 +24,7 @@ export function Services({ item, balance, invoice }: Props) {
         } else if (item.route === 'paybillsmenu') {
             navigate(item.route, { balance: balance, invoice: invoice })
         } else if (item.route === 'withdraw') {
-            navigate(item.route, { balance: balance })
+            navigate(item.route, { balance: balance, newAccount: null })
         } else {
             navigate(item.route)
         }

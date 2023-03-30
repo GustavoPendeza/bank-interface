@@ -34,7 +34,6 @@ interface ColorData {
 export function CreateGoal() {
     const homeData: HomeData = require('../data/home.json');
     const colorData: ColorData = require('../data/colors.json');
-    const { navigate } = useNavigation();
     const [newData, setNewData] = useState<Goal | null>(null)
     const [name, setName] = useState('');
     const [money, setMoney] = useState(0);
@@ -71,11 +70,11 @@ export function CreateGoal() {
                     } else {
                         if (name !== '' && color !== '' && progressColor !== '') {
                             setNewData({
-                                "name": name,
-                                "money": money,
-                                "goal": goal,
-                                "color": color,
-                                "progressColor": progressColor
+                                name: name,
+                                money: money,
+                                goal: goal,
+                                color: color,
+                                progressColor: progressColor
                             })
                         } else {
                             Alert.alert('Sorry', 'Fill in the fields correctly.')

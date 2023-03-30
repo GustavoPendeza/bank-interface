@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AddNewAccount } from '../screens/AddNewAccount';
 import { CreateGoal } from '../screens/CreateGoal';
 import { Index } from '../screens/Index';
 import { PayBill } from '../screens/PayBill';
@@ -21,6 +22,7 @@ export function AppRoutes() {
             <Screen name='paybill' component={PayBill} />
             <Screen name='paycreditcard' component={PayCreditCard} />
             <Screen name='withdraw' component={Withdraw} />
+            <Screen name='addnewaccount' component={AddNewAccount} />
         </Navigator>
     )
 }

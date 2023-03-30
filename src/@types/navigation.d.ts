@@ -4,11 +4,11 @@ export declare global {
             index: undefined,
             home: {
                 total: number;
-                credit: number;
+                credit: number | null;
             },
             transfer: undefined,
             savings: {
-                newData: Object | null
+                newData: Object | null;
             },
             createGoal: undefined,
             paybillsmenu: {
@@ -25,7 +25,12 @@ export declare global {
             },
             withdraw: {
                 balance: number;
-            }
+                newAccount: Object | null;
+            },
+            addnewaccount: {
+                balance: number;
+                accounts: Array | null;
+            },
         }
     }
 }

@@ -15,5 +15,27 @@
         {
             "value": 200
         }
+    ],
+    "accounts": [
+        {
+            "bank": "Banco do Brasil",
+            "agency": "1234-0",
+            "account": "09876543-1"
+        },
+        {
+            "bank": "Santander",
+            "agency": "5432",
+            "account": "87654321-9"
+        },
+        {
+            "bank": "Bradesco",
+            "agency": "8976-4",
+            "account": "8762345-2"
+        },
+        {
+            "bank": "Itaú",
+            "agency": "9856",
+            "account": "12563-0"
+        }
     ]
 }

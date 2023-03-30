@@ -7,7 +7,7 @@ interface Props {
     setValue: (arg: number) => void;
 }
 
-export default function WithdrawValues({ value, selectedValue, setValue }: Props) {
+export function WithdrawValues({ value, selectedValue, setValue }: Props) {
     return (
         <TouchableOpacity
             activeOpacity={0.7}

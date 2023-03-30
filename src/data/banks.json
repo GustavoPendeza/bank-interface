@@ -1,0 +1,19 @@
+{
+    "banks": [
+        {
+            "bank": "Banco do Brasil"
+        },
+        {
+            "bank": "Bradesco"
+        },
+        {
+            "bank": "Caixa Econômica"
+        },
+        {
+            "bank": "Itaú"
+        },
+        {
+            "bank": "Santander"
+        }
+    ]
+}
