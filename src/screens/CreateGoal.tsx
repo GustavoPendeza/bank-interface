@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { Modal, ScrollView } from "react-native";
 import { Alert, FlatList, ListRenderItemInfo, Text, TextInput, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import colors from "tailwindcss/colors";
 import { ColorSelect } from "../components/ColorSelect";
+import { SavingsCard } from "../components/SavingsCard";
 import { TitleScreen } from "../components/TItleScreen";
 import { FormatNumber } from "../utils/format-number";
 
@@ -40,6 +41,7 @@ export function CreateGoal() {
     const [goal, setGoal] = useState(0);
     const [color, setColor] = useState('');
     const [progressColor, setProgressColor] = useState('');
+    const [visibleModal, setVisibleModal] = useState(false);
 
     function renderItem({ item }: ListRenderItemInfo<Color>) {
         return (
@@ -59,7 +61,7 @@ export function CreateGoal() {
                 Alert.alert('Sorry', 'Make sure you entered the data correctly. Do not use commas or spaces in cash amounts.')
                 return;
             } else {
-                if (money >= goal) {
+                if (money > goal) {
                     Alert.alert('Sorry', 'The balance cannot be greater than the goal.')
                     return;
                 } else {
@@ -88,20 +90,7 @@ export function CreateGoal() {
 
     useEffect(() => {
         if (newData) {
-            return Alert.alert(
-                'Are you sure you want to create this goal?',
-                `Name: \"${name}\" \nOpening balance: $${FormatNumber(money)} \nGoal: $${FormatNumber(goal)}`,
-                [
-                    {
-                        text: "No"
-                    },
-                    {
-                        text: "Yes",
-                        onPress: () => { navigate('savings', { newData: newData }) }
-                    }
-                ],
-                { cancelable: true }
-            )
+            setVisibleModal(true)
         }
     }, [newData])
 
@@ -185,6 +174,69 @@ export function CreateGoal() {
                 </LinearGradient>
             </TouchableOpacity>
 
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                animationType={"slide"}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ModalCreateGoal
+                    handleClose={() => setVisibleModal(false)}
+                    newData={newData!}
+                />
+            </Modal>
+
+        </View>
+    )
+}
+
+interface Props {
+    handleClose: any;
+    newData: Goal;
+}
+
+export function ModalCreateGoal({ handleClose, newData }: Props) {
+    const { navigate } = useNavigation();
+
+    return (
+        <View className="flex-1">
+
+            <TouchableOpacity activeOpacity={0.7} className="flex-1 z-20 bg-background opacity-70" onPress={handleClose}></TouchableOpacity>
+
+            <View className="bg-background z-30" style={{ borderTopWidth: 1, borderColor: colors.zinc[500] }}>
+                <View className="m-5">
+                    <Text className="text-white text-xl font-semibold">Are you sure you want to create this goal?</Text>
+
+                    <View className="mt-8 mb-8 justify-center items-center">
+                        <SavingsCard item={newData} />
+                    </View>
+
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => navigate('savings', { newData: newData })}
+                    >
+                        <LinearGradient
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 0 }}
+                            colors={['#303551', '#342d46']}
+                            className="h-12 px-5 mb-5 items-center justify-center rounded-2xl"
+                        >
+                            <Text className="text-[#facad0] text-base font-semibold">Confirm</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={handleClose}
+                    >
+                        <View
+                            className="bg-[#303551] h-12 px-5 items-center justify-center rounded-2xl"
+                        >
+                            <Text className="text-red-600 text-base font-semibold">Cancel</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     )
 }
