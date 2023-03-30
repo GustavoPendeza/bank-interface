@@ -157,7 +157,7 @@ export function AddNewAccount() {
                                 />
                             </View>
 
-                            <View className="justify-center h-14 mt-10 mb-14 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
+                            <View className="justify-center h-14 mt-10 mb-20 mx-7 px-3 border-2 rounded-2xl border-zinc-600 focus:border-[#303453]">
                                 <MaskInput
                                     className="flex-1 text-white text-base"
                                     placeholder="Account number"
