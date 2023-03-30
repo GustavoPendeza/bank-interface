@@ -13,7 +13,6 @@ interface Props {
 }
 
 export function BankAccount({ item, account, setAccount }: Props) {
-    console.log(item === account)
     return (
         <TouchableOpacity
             activeOpacity={0.7}
