@@ -23,7 +23,7 @@ export function SavingsCard({ item }: Props) {
         <View className='h-40 w-40 px-5 py-3 rounded-2xl' style={{ backgroundColor: item.color }}>
             <Text className='text-white text-lg' numberOfLines={1}>{item.name}</Text>
 
-            <Text className="text-zinc-400 text-sm mt-2 mb-4">
+            <Text className="text-zinc-400 text-xs mt-2 mb-4" numberOfLines={1}>
                 ${FormatNumber(item.money)} /
                 ${FormatNumber(item.goal)}
             </Text>

@@ -81,7 +81,7 @@ export function Savings() {
                     }
                 </>
 
-                <Text className="text-white text-5xl" numberOfLines={1}>${FormatNumber(totalGoal)}</Text>
+                <Text className="text-white text-5xl mx-10" numberOfLines={1}>${FormatNumber(totalGoal)}</Text>
 
                 <ProgressBar money={totalMoney} goal={totalGoal} />
 
@@ -92,7 +92,7 @@ export function Savings() {
             </View>
 
             <FlatList
-                className="mx-7 mt-10"
+                className="mx-6 mt-10"
                 keyExtractor={(item: any, index) => item.name + index}
                 data={[...data.goals, { plusGoal }]}
                 renderItem={renderItem}

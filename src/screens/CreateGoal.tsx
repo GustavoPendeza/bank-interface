@@ -120,6 +120,7 @@ export function CreateGoal() {
                         placeholderTextColor={colors.zinc[400]}
                         keyboardType="number-pad"
                         onChange={(event) => setMoney(Number(Number(event.nativeEvent.text).toFixed(0)))}
+                        maxLength={6}
                         clearButtonMode="always"
                     />
                 </View>
@@ -133,6 +134,7 @@ export function CreateGoal() {
                         placeholderTextColor={colors.zinc[400]}
                         keyboardType="number-pad"
                         onChange={(event) => setGoal(Number(Number(event.nativeEvent.text).toFixed(0)))}
+                        maxLength={6}
                         clearButtonMode="always"
                     />
                 </View>
