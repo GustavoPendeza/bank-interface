@@ -1,0 +1,104 @@
+{
+    "today": [
+        {
+            "icon": "lightbulb-outline",
+            "color": "#facc15",
+            "name": "Electrecity payment",
+            "date": "19:01, 02/10/2021",
+            "cost": true,
+            "money": 520
+        },
+        {
+            "icon": "credit-card",
+            "color": "#7dd3fc",
+            "name": "Top up wallet",
+            "date": "19:01, 02/10/2021",
+            "cost": false,
+            "money": 126
+        },
+        {
+            "icon": "local-mall",
+            "color": "#a78bfa",
+            "name": "Pay for Apple",
+            "date": "19:01, 02/10/2021",
+            "cost": true,
+            "money": 36
+        }
+    ],
+    "yesterday": [
+        {
+            "icon": "local-mall",
+            "color": "#a78bfa",
+            "name": "Pay for iFood",
+            "date": "20:00, 01/10/2021",
+            "cost": true,
+            "money": 87
+        },
+        {
+            "icon": "wifi",
+            "color": "#ffffff",
+            "name": "Internet payment",
+            "date": "18:26, 01/10/2021",
+            "cost": true,
+            "money": 154
+        },
+        {
+            "icon": "monetization-on",
+            "color": "#facc15",
+            "name": "Savings",
+            "date": "16:58, 01/10/2021",
+            "cost": true,
+            "money": 210
+        },
+        {
+            "icon": "account-balance",
+            "color": "#7dd3fc",
+            "name": "Transfer",
+            "date": "13:07, 01/10/2021",
+            "cost": false,
+            "money": 1000
+        },
+        {
+            "icon": "credit-card",
+            "color": "#7dd3fc",
+            "name": "Top up wallet",
+            "date": "11:30, 01/09/2021",
+            "cost": false,
+            "money": 380
+        }
+    ],
+    "september": [
+        {
+            "icon": "local-mall",
+            "color": "#a78bfa",
+            "name": "Pay for Kabum",
+            "date": "12:32, 29/09/2021",
+            "cost": true,
+            "money": 280
+        },
+        {
+            "icon": "monetization-on",
+            "color": "#facc15",
+            "name": "Savings",
+            "date": "18:50, 25/09/2021",
+            "cost": true,
+            "money": 210
+        },
+        {
+            "icon": "local-mall",
+            "color": "#a78bfa",
+            "name": "Pay for iFood",
+            "date": "19:48, 22/09/2021",
+            "cost": true,
+            "money": 49
+        },
+        {
+            "icon": "account-balance",
+            "color": "#7dd3fc",
+            "name": "Transfer",
+            "date": "13:30, 14/09/2021",
+            "cost": false,
+            "money": 2500
+        }
+    ]
+}

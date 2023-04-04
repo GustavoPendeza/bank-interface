@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { FormatNumber } from "../utils/format-number";
 
 interface Transaction {
     icon: string;
@@ -30,7 +31,7 @@ export function Transactions({ item }: Props) {
             <View>
                 <Text className={item.cost === true ? 'text-red-500' : 'text-green-400'}>
                     {item.cost === true ? "-" : "+"}
-                    ${item.money}
+                    ${FormatNumber(item.money)}
                 </Text>
             </View>
         </View>

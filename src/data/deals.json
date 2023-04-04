@@ -1,0 +1,29 @@
+{
+    "deals": [
+        {
+            "store": "Ponto",
+            "logo": "https://user-images.githubusercontent.com/53589614/229900219-fbfc5f14-4e17-4a62-bf24-a9550691a8c6.png",
+            "discount": 60
+        },
+        {
+            "store": "Renner",
+            "logo": "https://user-images.githubusercontent.com/53589614/229900627-24db8b8c-36df-4e4a-8e2e-4a8f4f739db8.png",
+            "discount": 40
+        },
+        {
+            "store": "Kabum",
+            "logo": "https://user-images.githubusercontent.com/53589614/229901837-6904cff3-d95d-4f6f-b60a-3001bd6652e7.png",
+            "discount": 70
+        },
+        {
+            "store": "Magazine Luiza",
+            "logo": "https://user-images.githubusercontent.com/53589614/229901988-e92c9d1c-cbfe-402f-808e-3501e133f339.png",
+            "discount": 50
+        },
+        {
+            "store": "Xbox",
+            "logo": "https://user-images.githubusercontent.com/53589614/229902892-35eb53cb-0a6b-45f5-a492-84101f8b8191.png",
+            "discount": 10
+        }
+    ]
+}
